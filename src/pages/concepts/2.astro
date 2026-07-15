@@ -1,0 +1,115 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import Marquee from "../../components/Marquee.astro";
+import { WORDMARK, NAV, CTA, HERO, MARQUEE_CAPTION, WHY } from "../../data/concept.js";
+const fonts = [
+  "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap",
+];
+---
+<ConceptLayout title="ENGAGEM Concept 2: Bauhaus Geometric" description="ENGAGEM home page concept: Bauhaus constructive direction." fonts={fonts} themeColor="#ffffff">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#">{WORDMARK}</a>
+    <nav class="nav" aria-label="Primary">
+      <ul>{NAV.map((i) => <li><a href="#">{i}</a></li>)}</ul>
+    </nav>
+    <a class="cta" href="#">{CTA}</a>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero__text">
+        <p class="eyebrow">Moncton NB / Systems you can't see</p>
+        <h1>{HERO.h1}</h1>
+        <p class="hero__support">{HERO.support}</p>
+        <a class="cta cta--hero" href="#">{CTA}</a>
+      </div>
+      <div class="hero__art" aria-hidden="true">
+        <span class="shape shape--sq"></span>
+        <span class="shape shape--circ"></span>
+        <span class="shape shape--quarter"></span>
+        <span class="shape shape--bar"></span>
+      </div>
+    </section>
+
+    <section class="trust" aria-labelledby="trust-cap">
+      <Marquee />
+      <p class="trust__caption" id="trust-cap">{MARQUEE_CAPTION}</p>
+    </section>
+
+    <section class="why" aria-labelledby="why-h">
+      <h2 id="why-h">{WHY.h2}</h2>
+      <ul class="benefits">
+        {WHY.benefits.map((b, idx) => (
+          <li class={`b b--${idx}`}>
+            <span class="b__glyph" aria-hidden="true"></span>
+            <h3>{b.heading}</h3>
+            <p>{b.body}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+
+  <style is:global>
+    :root { --ink: #07344d; --green: #18d794; --paper: #ffffff; --cloud: #eef1f0; }
+    body { background: var(--paper); color: var(--ink);
+      font-family: "Outfit", system-ui, sans-serif; line-height: 1.5; }
+    .site-header { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 2rem;
+      padding: 1.4rem clamp(1.25rem, 5vw, 4rem); border-bottom: 4px solid var(--ink); }
+    .wordmark { font-weight: 900; font-size: 1.4rem; letter-spacing: 0.02em;
+      text-decoration: none; margin-right: auto; text-transform: uppercase; }
+    .nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.25rem; padding: 0; }
+    .nav a { text-decoration: none; font-weight: 600; font-size: 0.92rem; color: var(--ink); }
+    .nav a:hover { color: var(--green); }
+    .cta { text-decoration: none; font-weight: 800; font-size: 0.95rem; background: var(--green);
+      color: var(--ink); padding: 0.7rem 1.3rem; transition: transform 150ms ease; }
+    .cta:hover { transform: translateY(-2px); }
+
+    main { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+
+    .hero { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 6vw, 4rem);
+      align-items: center; padding: clamp(3rem, 8vw, 6rem) 0; }
+    .eyebrow { font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em;
+      font-size: 0.78rem; color: var(--green); margin-bottom: 1.25rem; }
+    h1 { font-weight: 900; font-size: clamp(3.2rem, 12vw, 7.5rem); line-height: 0.9;
+      letter-spacing: -0.03em; }
+    .hero__support { font-size: clamp(1.05rem, 2.3vw, 1.35rem); max-width: 40ch;
+      margin: 1.75rem 0 2.25rem; color: #33505d; font-weight: 400; }
+    .cta--hero { display: inline-block; font-size: 1.05rem; padding: 0.95rem 1.8rem; }
+
+    .hero__art { position: relative; aspect-ratio: 1 / 1; max-width: 460px;
+      width: 100%; margin-inline: auto; border: 4px solid var(--ink); }
+    .shape { position: absolute; }
+    .shape--sq { inset: 0 50% 50% 0; background: var(--ink); }
+    .shape--circ { inset: 0 0 50% 50%; background: var(--green); border-radius: 50%; }
+    .shape--quarter { inset: 50% 50% 0 0; background: var(--green);
+      border-radius: 0 100% 0 0; }
+    .shape--bar { inset: 50% 0 0 50%; background: var(--paper);
+      border-left: 4px solid var(--ink); }
+    .shape--bar::after { content: ""; position: absolute; inset: 22% 22%;
+      border: 4px solid var(--ink); border-radius: 50%; }
+    @media (min-width: 900px) { .hero { grid-template-columns: 1.15fr 0.85fr; } }
+
+    .trust { padding: clamp(2.5rem, 6vw, 4rem) 0; border-block: 4px solid var(--ink); }
+    .trust .mark { --mark-color: var(--ink); --mark-opacity: 0.5; --mark-size: 42px; }
+    .trust__caption { text-align: center; margin-top: 1.75rem; font-weight: 700;
+      font-size: 1.05rem; }
+
+    .why { padding: clamp(3.5rem, 9vw, 6.5rem) 0; }
+    h2 { font-weight: 900; font-size: clamp(2rem, 6vw, 3.6rem); line-height: 0.98;
+      letter-spacing: -0.02em; margin-bottom: clamp(2rem, 5vw, 3.25rem); max-width: 15ch; }
+    .benefits { list-style: none; padding: 0; display: grid; gap: 1.5rem;
+      grid-template-columns: 1fr; }
+    .b { border: 4px solid var(--ink); padding: 1.75rem; display: flex; flex-direction: column;
+      gap: 0.75rem; }
+    .b__glyph { width: 56px; height: 56px; }
+    .b--0 .b__glyph { background: var(--green); border-radius: 50%; }
+    .b--1 .b__glyph { background: var(--ink);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .b--2 .b__glyph { background: var(--green); }
+    .b h3 { font-weight: 800; font-size: 1.4rem; }
+    .b p { color: #33505d; }
+    @media (min-width: 860px) { .benefits { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+  </style>
+</ConceptLayout>

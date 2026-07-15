@@ -1,0 +1,92 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import Marquee from "../../components/Marquee.astro";
+import { WORDMARK, NAV, CTA, HERO, MARQUEE_CAPTION, WHY } from "../../data/concept.js";
+const fonts = [
+  "https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&f[]=general-sans@400,500&display=swap",
+];
+const preconnect = ["https://api.fontshare.com", "https://cdn.fontshare.com"];
+---
+<ConceptLayout title="ENGAGEM Concept 10: Exaggerated Minimalism" description="ENGAGEM home page concept: premium minimalist direction." fonts={fonts} preconnect={preconnect} themeColor="#ffffff">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#">{WORDMARK}</a>
+    <nav class="nav" aria-label="Primary">
+      <ul>{NAV.map((i) => <li><a href="#">{i}</a></li>)}</ul>
+    </nav>
+    <a class="cta" href="#"><span class="dot" aria-hidden="true"></span>{CTA}</a>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <h1>ENGAGE your market<span class="period">.</span></h1>
+      <p class="hero__support">{HERO.support}</p>
+      <a class="cta cta--hero" href="#"><span class="dot" aria-hidden="true"></span>{CTA}</a>
+    </section>
+
+    <section class="trust" aria-labelledby="trust-cap">
+      <Marquee />
+      <p class="trust__caption" id="trust-cap">{MARQUEE_CAPTION}</p>
+    </section>
+
+    <section class="why" aria-labelledby="why-h">
+      <h2 id="why-h">{WHY.h2}</h2>
+      <ul class="benefits">
+        {WHY.benefits.map((b) => (
+          <li>
+            <span class="dot dot--lg" aria-hidden="true"></span>
+            <h3>{b.heading}</h3>
+            <p>{b.body}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+
+  <style is:global>
+    :root { --ink: #0f1112; --green: #18d794; --paper: #ffffff; --grey: #8b9096; }
+    body { background: var(--paper); color: var(--ink);
+      font-family: "General Sans", system-ui, sans-serif; line-height: 1.6; }
+    .site-header { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 2.5rem;
+      max-width: 1080px; margin: 0 auto; padding: 2rem clamp(1.25rem, 5vw, 3rem); }
+    .wordmark { font-family: "Satoshi", sans-serif; font-weight: 900; font-size: 1.15rem;
+      letter-spacing: 0.14em; text-decoration: none; margin-right: auto; }
+    .nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.6rem; padding: 0; }
+    .nav a { text-decoration: none; font-weight: 500; font-size: 0.88rem; color: var(--grey); }
+    .nav a:hover { color: var(--ink); }
+    .cta { text-decoration: none; font-family: "Satoshi", sans-serif; font-weight: 700;
+      font-size: 0.9rem; color: var(--ink); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .cta:hover { color: var(--green); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+      display: inline-block; flex: 0 0 auto; }
+
+    main { max-width: 1080px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
+
+    .hero { padding: clamp(5rem, 16vw, 12rem) 0 clamp(5rem, 14vw, 11rem); max-width: 20ch; }
+    h1 { font-family: "Satoshi", sans-serif; font-weight: 700; font-size: clamp(2.8rem, 8vw, 5.5rem);
+      line-height: 1.04; letter-spacing: -0.03em; }
+    .period { color: var(--green); }
+    .hero__support { font-size: clamp(1.05rem, 2.2vw, 1.3rem); max-width: 40ch; color: #3d4247;
+      margin: 2.5rem 0 3rem; font-weight: 400; }
+    .cta--hero { font-size: 1.05rem; }
+
+    .trust { padding: clamp(4rem, 10vw, 7rem) 0; }
+    .trust .mark { --mark-color: var(--ink); --mark-opacity: 0.22; --mark-size: 36px;
+      --mark-gap: 5rem; }
+    .trust__caption { text-align: center; margin-top: 2.5rem; font-size: 0.85rem;
+      letter-spacing: 0.08em; color: var(--grey); }
+
+    .why { padding: clamp(4rem, 12vw, 9rem) 0 clamp(6rem, 16vw, 12rem);
+      border-top: 1px solid #ececec; }
+    h2 { font-family: "Satoshi", sans-serif; font-weight: 700; font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1.1; letter-spacing: -0.02em; margin: clamp(3rem, 8vw, 5rem) 0 clamp(2.5rem, 6vw, 4rem);
+      max-width: 16ch; }
+    .benefits { list-style: none; padding: 0; display: grid; gap: 3rem; grid-template-columns: 1fr; }
+    .benefits li { padding-top: 1.5rem; }
+    .dot--lg { width: 12px; height: 12px; margin-bottom: 1.5rem; }
+    .benefits h3 { font-family: "Satoshi", sans-serif; font-weight: 700; font-size: 1.35rem;
+      margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+    .benefits p { color: #3d4247; max-width: 36ch; }
+    @media (min-width: 860px) { .benefits { grid-template-columns: repeat(3, 1fr); gap: 3.5rem; } }
+  </style>
+</ConceptLayout>

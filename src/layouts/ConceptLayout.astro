@@ -1,0 +1,79 @@
+---
+// Shared document shell for every concept page. Holds the <head>, the reset,
+// accessibility base (visible focus, sr-only), the marquee mechanics, and the
+// global prefers-reduced-motion guard so each concept only writes its design.
+const { title, description, fonts = [], preconnect = [], themeColor = "#07344d", scheme = "light" } = Astro.props;
+---
+<!doctype html>
+<html lang="en" style={`color-scheme:${scheme}`}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta name="theme-color" content={themeColor} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {preconnect.map((href) => <link rel="preconnect" href={href} crossorigin />)}
+    {fonts.map((href) => <link rel="stylesheet" href={href} />)}
+    <style is:global>
+      *, *::before, *::after { box-sizing: border-box; }
+      * { margin: 0; }
+      html { -webkit-text-size-adjust: 100%; }
+      body { min-height: 100vh; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+      img, svg { display: block; max-width: 100%; }
+      a { color: inherit; }
+      button { font: inherit; color: inherit; cursor: pointer; }
+      :where(a, button, summary) { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+
+      #main { scroll-margin-top: 1.5rem; }
+
+      :where(a, button, summary):focus-visible {
+        outline: 3px solid currentColor;
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      .sr-only {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+      }
+
+      .skip-link {
+        position: absolute; left: 1rem; top: 1rem; z-index: 100;
+        padding: 0.6rem 1rem; background: #07344d; color: #fff;
+        border-radius: 6px; text-decoration: none;
+        transform: translateY(-400%); transition: transform 150ms ease;
+      }
+      .skip-link:focus { transform: translateY(0); }
+
+      /* Seamless marquee mechanics; each concept sets the CSS vars below. */
+      .marquee { width: 100%; overflow: hidden;
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      }
+      .marquee__track { display: flex; width: max-content;
+        animation: marquee-scroll var(--mark-speed, 48s) linear infinite;
+      }
+      .mark { flex: 0 0 auto; display: grid; place-items: center;
+        margin-inline-end: var(--mark-gap, 3.5rem);
+        color: var(--mark-color, currentColor); opacity: var(--mark-opacity, 0.5);
+      }
+      .mark svg { width: var(--mark-size, 40px); height: var(--mark-size, 40px); }
+      @keyframes marquee-scroll { to { transform: translateX(-50%); } }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

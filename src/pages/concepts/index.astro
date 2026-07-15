@@ -1,0 +1,77 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import { DIRECTIONS } from "../../data/concept.js";
+const fonts = [
+  "https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Public+Sans:wght@400;500;600&display=swap",
+];
+---
+<ConceptLayout title="ENGAGEM Concept Gallery" description="Ten home-page design directions for ENGAGEM. Design exploration only." fonts={fonts} themeColor="#f4f8fb">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <span class="wordmark">ENGAGEM</span>
+    <span class="kicker">Concept gallery</span>
+  </header>
+
+  <main id="main">
+    <section class="intro">
+      <h1>Ten home-page directions.</h1>
+      <p>Same copy on every page, so only the design varies. Six stay anchored to the brand palette; four are deliberate departures. Open any concept to see the full first impression.</p>
+    </section>
+
+    <ol class="grid">
+      {DIRECTIONS.map((d) => (
+        <li>
+          <a class="card" href={`/concepts/${d.n}/`}>
+            <span class="card__num">{String(d.n).padStart(2, "0")}</span>
+            <span class={`chip chip--${d.anchor}`}>{d.anchor === "brand" ? "In brand" : "Departure"}</span>
+            <span class="card__name">{d.name}</span>
+            <span class="card__note">{d.note}</span>
+            <span class="card__go" aria-hidden="true">View concept &rsaquo;</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </main>
+
+  <style is:global>
+    :root { --ink: #07344d; --ink-2: #0a3f5c; --green: #18d794; --paper: #f4f8fb;
+      --slate: #4a5c65; --line: #e0e7ea; }
+    body { background: var(--paper); color: var(--ink);
+      font-family: "Public Sans", system-ui, sans-serif; line-height: 1.6; }
+    .site-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem;
+      max-width: 1180px; margin: 0 auto; padding: 1.75rem clamp(1.25rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--line); }
+    .wordmark { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 1.35rem;
+      letter-spacing: 0.04em; }
+    .kicker { font-family: "Outfit", sans-serif; font-weight: 500; color: var(--green);
+      text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.78rem; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+
+    .intro { padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(2rem, 5vw, 3rem); max-width: 44ch; }
+    h1 { font-family: "Outfit", sans-serif; font-weight: 800; font-size: clamp(2.4rem, 7vw, 4rem);
+      line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+    .intro p { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--slate); }
+
+    .grid { list-style: none; padding: 0 0 clamp(4rem, 10vw, 7rem); display: grid; gap: 1.25rem;
+      grid-template-columns: 1fr; }
+    .card { display: grid; gap: 0.5rem; text-decoration: none; background: #fff;
+      border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem;
+      transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease; height: 100%; }
+    .card:hover { transform: translateY(-3px); border-color: var(--green);
+      box-shadow: 0 12px 28px rgba(7,52,77,0.1); }
+    .card__num { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 0.95rem;
+      color: var(--green); }
+    .chip { justify-self: start; font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; padding: 0.25rem 0.6rem; border-radius: 999px; }
+    .chip--brand { background: rgba(7,52,77,0.08); color: var(--ink); }
+    .chip--departure { background: rgba(24,215,148,0.16); color: var(--ink-2); }
+    .card__name { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 1.3rem;
+      margin-top: 0.25rem; }
+    .card__note { color: var(--slate); font-size: 0.98rem; }
+    .card__go { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 0.9rem;
+      color: var(--green); margin-top: 0.5rem; }
+    @media (min-width: 620px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+  </style>
+</ConceptLayout>

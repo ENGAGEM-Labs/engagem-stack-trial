@@ -1,0 +1,125 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import Marquee from "../../components/Marquee.astro";
+import { WORDMARK, NAV, CTA, HERO, MARQUEE_CAPTION, WHY } from "../../data/concept.js";
+const fonts = [
+  "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap",
+];
+---
+<ConceptLayout title="ENGAGEM Concept 5: Geometric Blueprint" description="ENGAGEM home page concept: schematic blueprint direction." fonts={fonts} themeColor="#f4f8fb">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#">{WORDMARK}<span class="tag" aria-hidden="true">/ est. 20yr</span></a>
+    <nav class="nav" aria-label="Primary">
+      <ul>{NAV.map((i) => <li><a href="#">{i}</a></li>)}</ul>
+    </nav>
+    <a class="cta" href="#">{CTA}</a>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow" aria-hidden="true">// the systems you can't see</p>
+      <h1>{HERO.h1}</h1>
+      <div class="schematic" aria-hidden="true">
+        <span class="node n1"></span><span class="node n2"></span><span class="node n3"></span>
+        <span class="link"></span>
+        <span class="label lbl1">lead_capture</span>
+        <span class="label lbl2">automation</span>
+        <span class="label lbl3">ai_layer</span>
+      </div>
+      <p class="hero__support">{HERO.support}</p>
+      <a class="cta cta--hero" href="#">{CTA}</a>
+    </section>
+
+    <section class="trust" aria-labelledby="trust-cap">
+      <p class="trust__caption" id="trust-cap">{MARQUEE_CAPTION}</p>
+      <Marquee />
+    </section>
+
+    <section class="why" aria-labelledby="why-h">
+      <h2 id="why-h">{WHY.h2}</h2>
+      <ul class="benefits">
+        {WHY.benefits.map((b, idx) => (
+          <li>
+            <span class="mono" aria-hidden="true">{`0${idx + 1} /`}</span>
+            <h3>{b.heading}</h3>
+            <p>{b.body}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+
+  <style is:global>
+    :root { --ink: #07344d; --green: #18d794; --green-deep: #0e8f65;
+      --paper: #f4f8fb; --grid: rgba(7,52,77,0.07); --slate: #3f5763; }
+    body { background: var(--paper); color: var(--ink);
+      font-family: "Work Sans", system-ui, sans-serif; line-height: 1.55;
+      background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px; }
+    .site-header { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 2rem;
+      max-width: 1200px; margin: 0 auto; padding: 1.4rem clamp(1.25rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--ink); }
+    .wordmark { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 1.35rem;
+      letter-spacing: 0.02em; text-decoration: none; margin-right: auto;
+      display: inline-flex; align-items: baseline; gap: 0.6rem; }
+    .tag { font-family: "Space Mono", monospace; font-size: 0.72rem; color: var(--green-deep);
+      font-weight: 400; }
+    .nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.3rem; padding: 0; }
+    .nav a { text-decoration: none; font-weight: 500; font-size: 0.92rem; color: var(--slate); }
+    .nav a:hover { color: var(--green-deep); }
+    .cta { font-family: "Outfit", sans-serif; text-decoration: none; font-weight: 700;
+      font-size: 0.92rem; color: var(--ink); border: 2px solid var(--ink);
+      padding: 0.62rem 1.2rem;
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease; }
+    .cta:hover { background: var(--green); border-color: var(--green); }
+
+    main { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+
+    .hero { padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 7vw, 5rem); }
+    .eyebrow { font-family: "Space Mono", monospace; font-size: 0.85rem; color: var(--green-deep);
+      margin-bottom: 1.25rem; }
+    h1 { font-family: "Outfit", sans-serif; font-weight: 800; font-size: clamp(3rem, 11vw, 7.5rem);
+      line-height: 0.92; letter-spacing: -0.03em; max-width: 14ch; }
+
+    .schematic { position: relative; height: 120px; margin: 2rem 0 1rem; max-width: 620px; }
+    .schematic::before { content: ""; position: absolute; left: 0; right: 0; top: 24px;
+      border-top: 1.5px dashed var(--ink); opacity: 0.5; }
+    .node { position: absolute; top: 17px; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--paper); border: 2.5px solid var(--ink); }
+    .n1 { left: 4%; } .n2 { left: 48%; background: var(--green); border-color: var(--green-deep); }
+    .n3 { left: 92%; }
+    .label { position: absolute; top: 52px; font-family: "Space Mono", monospace;
+      font-size: 0.75rem; color: var(--slate); transform: translateX(-50%); }
+    .lbl1 { left: 6%; } .lbl2 { left: 48%; color: var(--green-deep); } .lbl3 { left: 90%; }
+
+    .hero__support { font-size: clamp(1.05rem, 2.3vw, 1.4rem); max-width: 44ch;
+      margin: 1.5rem 0 2.25rem; color: var(--slate); }
+    .cta--hero { display: inline-block; font-size: 1.05rem; padding: 0.92rem 1.9rem;
+      background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .cta--hero:hover { background: var(--green); border-color: var(--green); color: var(--ink); }
+
+    .trust { padding: clamp(3rem, 7vw, 5rem) 0; text-align: center;
+      border-block: 1px solid var(--ink); }
+    .trust__caption { font-family: "Space Mono", monospace; font-size: 0.82rem;
+      color: var(--slate); margin-bottom: 2rem; letter-spacing: 0.02em; }
+    .trust .mark { --mark-color: var(--ink); --mark-opacity: 0.45; --mark-size: 40px; }
+
+    .why { padding: clamp(3.5rem, 9vw, 6.5rem) 0 clamp(4.5rem, 11vw, 8rem); }
+    h2 { font-family: "Outfit", sans-serif; font-weight: 800; font-size: clamp(2rem, 5.5vw, 3.4rem);
+      line-height: 1; letter-spacing: -0.02em; margin-bottom: clamp(2rem, 5vw, 3rem); max-width: 15ch; }
+    .benefits { list-style: none; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+    .benefits li { background: #fff; border: 1.5px solid var(--ink); padding: 1.75rem;
+      position: relative; }
+    .benefits li::after { content: ""; position: absolute; top: 8px; right: 8px;
+      width: 10px; height: 10px; border-top: 2px solid var(--green-deep);
+      border-right: 2px solid var(--green-deep); }
+    .mono { font-family: "Space Mono", monospace; color: var(--green-deep); font-size: 0.9rem;
+      display: block; margin-bottom: 0.8rem; }
+    .benefits h3 { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 1.35rem;
+      margin-bottom: 0.5rem; }
+    .benefits p { color: var(--slate); }
+    @media (min-width: 860px) { .benefits { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+  </style>
+</ConceptLayout>

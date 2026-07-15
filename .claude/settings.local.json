@@ -26,7 +26,8 @@
       "mcp__paper__get_node_info",
       "Bash(npm run:*)",
       "mcp__paper__get_tree_summary",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

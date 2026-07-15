@@ -1,0 +1,12 @@
+---
+import Marks from "./Marks.astro";
+// A slow, seamless ribbon of placeholder marks. Duplicated set + equal
+// trailing margin on every mark makes translateX(-50%) loop perfectly.
+// Motion is paused under prefers-reduced-motion (see ConceptLayout base).
+---
+<div class="marquee" role="img" aria-label="Placeholder client logos">
+  <div class="marquee__track">
+    <Marks />
+    <Marks />
+  </div>
+</div>

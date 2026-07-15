@@ -1,0 +1,119 @@
+---
+import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import Marquee from "../../components/Marquee.astro";
+import { WORDMARK, NAV, CTA, HERO, MARQUEE_CAPTION, WHY } from "../../data/concept.js";
+const fonts = [
+  "https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,500;0,700;1,500;1,600&family=Public+Sans:wght@400;500;600;700&display=swap",
+];
+---
+<ConceptLayout title="ENGAGEM Concept 1: Editorial Grid" description="ENGAGEM home page concept: editorial magazine direction." fonts={fonts} themeColor="#f7f4ec">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#">{WORDMARK}</a>
+    <nav class="nav" aria-label="Primary">
+      <ul>{NAV.map((i) => <li><a href="#">{i}</a></li>)}</ul>
+    </nav>
+    <a class="cta" href="#">{CTA}</a>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow">The unseen systems issue <span>No. 20</span></p>
+      <h1>{HERO.h1}</h1>
+      <div class="hero__lower">
+        <p class="hero__support">{HERO.support}</p>
+        <a class="cta cta--hero" href="#">{CTA}<span aria-hidden="true">&nbsp;&rsaquo;</span></a>
+      </div>
+    </section>
+
+    <section class="trust" aria-labelledby="trust-cap">
+      <div class="rule"></div>
+      <Marquee />
+      <p class="trust__caption" id="trust-cap">{MARQUEE_CAPTION}</p>
+    </section>
+
+    <section class="why" aria-labelledby="why-h">
+      <h2 id="why-h">{WHY.h2}</h2>
+      <ol class="benefits">
+        {WHY.benefits.map((b, idx) => (
+          <li>
+            <span class="benefits__num" aria-hidden="true">{String(idx + 1).padStart(2, "0")}</span>
+            <h3>{b.heading}</h3>
+            <p>{b.body}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </main>
+
+  <style is:global>
+    :root {
+      --ink: #07344d; --green: #18d794; --paper: #f7f4ec; --line: #d9d2c2;
+      --muted: #5a6b74;
+    }
+    body { background: var(--paper); color: var(--ink);
+      font-family: "Public Sans", system-ui, sans-serif; line-height: 1.55; }
+    .site-header { display: flex; flex-wrap: wrap; align-items: baseline;
+      gap: 0.75rem 2rem; padding: 1.5rem clamp(1.25rem, 5vw, 4rem);
+      border-bottom: 1.5px solid var(--ink); }
+    .wordmark { font-family: "Libre Bodoni", serif; font-weight: 700;
+      font-size: 1.35rem; letter-spacing: 0.18em; text-decoration: none;
+      margin-right: auto; }
+    .nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.25rem; padding: 0; }
+    .nav a { text-decoration: none; font-size: 0.8rem; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted); padding: 0.35rem 0; }
+    .nav a:hover { color: var(--ink); }
+    .cta { text-decoration: none; font-weight: 600; font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink);
+      border-bottom: 2px solid var(--green); padding: 0.4rem 0.1rem 0.25rem; }
+    .cta:hover { color: var(--green); }
+
+    main { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+
+    .hero { padding: clamp(3rem, 9vw, 7rem) 0 clamp(2.5rem, 6vw, 5rem); }
+    .eyebrow { font-family: "Libre Bodoni", serif; font-style: italic;
+      font-size: 1rem; color: var(--muted); display: flex; gap: 1rem;
+      align-items: center; margin-bottom: 1.5rem; }
+    .eyebrow span { font-style: normal; letter-spacing: 0.2em; text-transform: uppercase;
+      font-size: 0.7rem; padding: 0.2rem 0.6rem; border: 1px solid var(--line);
+      font-family: "Public Sans", sans-serif; }
+    h1 { font-family: "Libre Bodoni", serif; font-weight: 700;
+      font-size: clamp(3.4rem, 13vw, 9rem); line-height: 0.94;
+      letter-spacing: -0.02em; max-width: 14ch; }
+    h1::first-letter { color: var(--green); }
+    .hero__lower { display: grid; gap: 1.75rem 3rem; margin-top: clamp(2rem, 5vw, 3.5rem);
+      grid-template-columns: 1fr; align-items: end; border-top: 1px solid var(--line);
+      padding-top: 2rem; }
+    .hero__support { font-size: clamp(1.05rem, 2.4vw, 1.4rem); max-width: 46ch; color: #2b4a58; }
+    .cta--hero { justify-self: start; border: none; background: var(--ink); color: var(--paper);
+      padding: 0.95rem 1.6rem; border-radius: 0; letter-spacing: 0.1em;
+      transition: background 150ms ease; }
+    .cta--hero:hover { background: var(--green); color: var(--ink); }
+    @media (min-width: 820px) {
+      .hero__lower { grid-template-columns: 1fr auto; }
+    }
+
+    .trust { padding: clamp(2.5rem, 6vw, 4rem) 0; }
+    .rule { height: 1px; background: var(--line); margin-bottom: 2rem; }
+    .trust .mark { --mark-color: var(--ink); --mark-opacity: 0.42; --mark-size: 38px; }
+    .trust__caption { font-family: "Libre Bodoni", serif; font-style: italic;
+      text-align: center; margin-top: 2rem; font-size: 1.15rem; color: var(--muted); }
+
+    .why { padding: clamp(3rem, 8vw, 6rem) 0 clamp(4rem, 10vw, 8rem);
+      border-top: 1.5px solid var(--ink); }
+    h2 { font-family: "Libre Bodoni", serif; font-weight: 700;
+      font-size: clamp(2rem, 5.5vw, 3.4rem); line-height: 1.02; letter-spacing: -0.01em;
+      max-width: 16ch; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+    .benefits { list-style: none; padding: 0; display: grid; gap: 2.5rem;
+      grid-template-columns: 1fr; }
+    .benefits li { padding-top: 1.25rem; border-top: 3px solid var(--green); }
+    .benefits__num { font-family: "Libre Bodoni", serif; font-size: 1rem;
+      color: var(--muted); display: block; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+    .benefits h3 { font-family: "Libre Bodoni", serif; font-weight: 600;
+      font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .benefits p { color: #2b4a58; max-width: 34ch; }
+    @media (min-width: 820px) {
+      .benefits { grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+    }
+  </style>
+</ConceptLayout>
