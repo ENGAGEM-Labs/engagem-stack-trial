@@ -16,7 +16,17 @@
       "Bash(npm install:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(npx:*)",
+      "Bash(gh api:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "mcp__paper__get_computed_styles",
+      "mcp__paper__get_node_info",
+      "Bash(npm run:*)",
+      "mcp__paper__get_tree_summary",
+      "WebSearch"
     ]
   }
 }
