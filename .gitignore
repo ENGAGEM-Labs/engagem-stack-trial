@@ -4,3 +4,7 @@ dist/
 .vercel/
 
 .vercel
+
+# extract-design-system skill output (scraped tokens; keep out of the repo)
+.extract-design-system/
+design-system/

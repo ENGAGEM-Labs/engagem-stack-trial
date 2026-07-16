@@ -27,7 +27,9 @@
       "Bash(npm run:*)",
       "mcp__paper__get_tree_summary",
       "WebSearch",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:engagem-site.vercel.app)",
+      "Bash(gh search *)"
     ]
   }
 }
