@@ -29,7 +29,10 @@
       "WebSearch",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:engagem-site.vercel.app)",
-      "Bash(gh search *)"
+      "Bash(gh search *)",
+      "Bash(curl -sSL -o /dev/null -w \"final URL: %{url_effective}\\\\nHTTP: %{http_code}\\\\ncontent-type: %{content_type}\\\\n\" https://engagem.ca)",
+      "Bash(node -e \"const r=require\\('./.extract-design-system/raw.json'\\); console.log\\(Object.keys\\(r\\)\\); for\\(const k of Object.keys\\(r\\)\\){const v=r[k]; console.log\\(k, Array.isArray\\(v\\)?\\('array['+v.length+']'\\):typeof v\\);}\")",
+      "Bash(grep -oiE \"#[0-9a-f]{3,8}\\\\b\" .extract-design-system/raw.json)"
     ]
   }
 }

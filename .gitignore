@@ -7,4 +7,7 @@ dist/
 
 # extract-design-system skill output (scraped tokens; keep out of the repo)
 .extract-design-system/
-design-system/
+# Ignore scraped design-system output, but keep hand-authored files tracked.
+design-system/*
+!design-system/brand-discrepancy.md
+!design-system/tokens.css
