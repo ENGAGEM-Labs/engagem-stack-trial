@@ -5,6 +5,11 @@ dist/
 
 .vercel
 
+# Per-machine Claude Code permission grants. Rewritten on almost every
+# session, so tracking it produces constant churn with no shared value.
+# Shared/team settings belong in .claude/settings.json instead.
+.claude/settings.local.json
+
 # Remotion render output (large binaries; re-renderable from source)
 video/out/
 
