@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "defaultMode": "default",
+
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Bash(ls *)",
+      "Bash(pwd)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(find *)",
+      "Bash(echo *)",
+      "Bash(du *)",
+
+      "Bash(git status *)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git show *)",
+      "Bash(git ls-files *)",
+      "Bash(git branch *)",
+      "Bash(git check-ignore *)",
+
+      "Bash(npm run build *)",
+      "Bash(npm run dev *)",
+      "Bash(npm run preview *)",
+      "Bash(npm run lint *)",
+      "Bash(npx astro *)",
+      "Bash(npx tsc *)",
+
+      "Bash(node .claude/skills/impeccable/scripts/*)",
+      "Bash(node .extract-design-system/*)",
+      "Bash(npx extract-design-system *)",
+      "Bash(npx remotion render *)",
+      "Bash(npx remotion still *)",
+      "Bash(npx remotion studio *)",
+
+      "Bash(git add *)",
+      "Bash(git commit *)",
+
+      "Edit",
+      "Write"
+    ],
+
+    "ask": [
+      "Bash(git push *)",
+
+      "Bash(rm *)",
+      "Bash(rmdir *)",
+      "Bash(del *)",
+      "Bash(Remove-Item *)",
+      "Bash(git rm *)",
+      "Bash(git clean *)",
+      "Bash(git reset *)",
+      "Bash(git checkout *)",
+      "Bash(git restore *)",
+
+      "Edit(.claude/**)",
+      "Write(.claude/**)",
+      "Edit(.gitignore)",
+      "Edit(package.json)",
+      "Edit(package-lock.json)",
+      "Edit(tsconfig.json)",
+      "Edit(astro.config.mjs)",
+      "Edit(vercel.json)",
+      "Edit(*.config.*)",
+
+      "Bash(npm install *)",
+      "Bash(npm i *)",
+      "Bash(npm add *)",
+      "Bash(npm uninstall *)",
+      "Bash(pnpm add *)",
+      "Bash(yarn add *)",
+      "Bash(bun add *)",
+      "Bash(pip install *)",
+      "Bash(npx create-*)",
+      "Bash(git clone *)",
+      "Bash(npx playwright install *)",
+      "Bash(npx remotion add *)",
+      "Bash(npx remotion upgrade *)"
+    ]
+  }
+}
