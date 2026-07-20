@@ -28,10 +28,21 @@ const { title, description, fonts = [], preconnect = [], themeColor = "#07344d",
 
       #main { scroll-margin-top: 1.5rem; }
 
+      /* Dual-tone focus ring. A single currentColor ring is unreliable: any
+         element that inverts its colors against its container (the green CTA on
+         a teal page being the standard case) draws the ring in the container's
+         own color at 1:1. The light ring and the dark halo bracket each other,
+         so one of the two always clears 3:1 whatever sits behind it. Concepts
+         can retune per surface via --focus-ring / --focus-halo. */
       :where(a, button, summary):focus-visible {
-        outline: 3px solid currentColor;
-        outline-offset: 3px;
-        border-radius: 2px;
+        outline: 3px solid var(--focus-ring, #fff);
+        outline-offset: 2px;
+        box-shadow: 0 0 0 8px var(--focus-halo, rgba(3, 22, 33, 0.65));
+        /* The indicator must paint instantly. A concept that transitions
+           box-shadow for its own hover effect (concept 8's .cta does) would
+           otherwise drag the halo through that transition, and it never
+           arrives at all in renderers that don't advance transitions. */
+        transition: none;
       }
 
       .sr-only {
@@ -62,11 +73,20 @@ const { title, description, fonts = [], preconnect = [], themeColor = "#07344d",
       .mark svg { width: var(--mark-size, 40px); height: var(--mark-size, 40px); }
       @keyframes marquee-scroll { to { transform: translateX(-50%); } }
 
+      /* Collapse motion rather than disable it, so animations still "run" and
+         fire their end events. animation-delay and animation-fill-mode must be
+         reset too: without them, `animation: fadeUp 600ms 400ms both` holds its
+         hidden from-state through the un-reset delay and the element renders
+         blank. Resetting both guarantees every element's static state is its
+         visible state, which is the invariant each concept is built on. */
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
           animation-duration: 0.001ms !important;
           animation-iteration-count: 1 !important;
+          animation-delay: 0ms !important;
+          animation-fill-mode: none !important;
           transition-duration: 0.001ms !important;
+          transition-delay: 0ms !important;
           scroll-behavior: auto !important;
         }
       }
