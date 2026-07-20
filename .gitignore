@@ -8,6 +8,12 @@ dist/
 # Remotion render output (large binaries; re-renderable from source)
 video/out/
 
+# impeccable skill output (timestamped critique runs; regenerable).
+# Keep .impeccable/assets/ — it's project content, not output: PRODUCT.md
+# > Conversion & proof directs client logos and testimonials there.
+.impeccable/*
+!.impeccable/assets/
+
 # extract-design-system skill output (scraped tokens; keep out of the repo)
 .extract-design-system/
 # Ignore scraped design-system output, but keep hand-authored files tracked.
